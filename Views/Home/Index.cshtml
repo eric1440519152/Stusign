@@ -1,0 +1,1122 @@
+﻿@{
+    ViewData["Title"] = "报名信息";
+    Layout = "_DashboardLayout";
+}
+@model Stusign.ViewModels.Home.IndexViewModel
+
+@section StuAddInfoHead {
+
+    <link rel="stylesheet" href="~/css/fonts/linecons/css/linecons.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/fonts/fontawesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/xenon-core.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/xenon-forms.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/xenon-components.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/xenon-skins.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/custom.css" type="text/css" />
+    <script src="~/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            // Skins
+            $('input.xiaoqu').each(function (i, el) {
+                var self = $(el),
+                    label = self.next(),
+                    label_text = label.text();
+
+                label.remove();
+
+                self.iCheck({
+                    checkboxClass: 'icheckbox_line-green',
+                    radioClass: 'iradio_line-green',
+                    insert: '<div class="icheck_line-icon"></div>' + label_text
+                });
+            });
+        });
+    </script>
+
+    <style type="text/css">
+
+        body, select, textarea {
+            font-size: 1.1em
+        }
+
+        body, html, input {
+            font-family: "微软雅黑";
+        }
+
+        errormessage.error {
+            font-style: normal;
+            color: firebrick;
+            font-size: 12px;
+        }
+    </style>
+}
+<div class="main-content" style="">
+    <form method="post" id="info" asp-action="SaveInfo">
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div class="row">
+
+                    <div class="col-sm-6">
+
+                        <div class="xe-widget xe-counter xe-counter-blue">
+
+                            <div class="xe-label">
+                                <strong class="num">@Model.编号</strong>
+                                <span>登记编号</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-6">
+
+                        <div class="xe-widget xe-counter ">
+
+                            <div class="xe-label">
+                                <strong class="num">@Model.信息状态</strong>
+                                <span>报名状态</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            学生一寸免冠照
+                        </h3>
+                    </div>
+
+                    <div class="panel-body">
+
+                        <script type="text/javascript">
+                            jQuery(document).ready(function ($) {
+
+                                var opts = {
+                                    "closeButton": true,
+                                    "debug": false,
+                                    "positionClass": "toast-bottom-right",
+                                    "onclick": null,
+                                    "showDuration": "300",
+                                    "hideDuration": "1000",
+                                    "timeOut": "5000",
+                                    "extendedTimeOut": "1000",
+                                    "showEasing": "swing",
+                                    "hideEasing": "linear",
+                                    "showMethod": "fadeIn",
+                                    "hideMethod": "fadeOut"
+                                };
+
+                                var i = 1;
+
+                                $("#advancedDropzone").dropzone({
+                                    url: '@Url.Action("Upload","File")',
+                                    method: "post",  //也可用put
+                                    maxFiles: 1,//一次性上传的文件数量上限
+                                    maxFilesize: @ViewBag.FileSizeMax, //MB
+                                    acceptedFiles: ".jpg", //上传的类型
+                                    parallelUploads: 3,
+                                    dictMaxFilesExceeded: "您最多只能上传1个文件！",
+                                    dictResponseError: '文件上传失败!',
+                                    dictInvalidFileType: "你不能上传该类型文件,文件类型只能是JPG。",
+                                    dictFallbackMessage: "浏览器不受支持",
+                                    dictFileTooBig: "上传文件过大，最大文件大小"+@ViewBag.FileSizeMax+"MB",
+
+                                    // Events
+                                    //addedfile: function (file) {
+                                        //toastr.info("您的文件已经开始上传", "文件上传", opts);
+                                    //},
+
+                                    sending: function(file, xhr, formData) {
+                                        //每次文件上传前执行的操作
+                                        $('#dropzone').hide();
+                                        $('#dropzoneMessage').show();
+                                    },
+
+                                    uploadprogress: function (file, progress, bytesSent) {
+                                        show_loading_bar({
+                                            delay: .5,
+                                            pct: progress
+                                        });
+                                    },
+
+                                    success: function (file,res) {
+                                        if (res.statue == "OK") {
+                                            toastr.success("您的文件已经上传", "文件上传", opts);
+                                            $("#fileMessage").html("文件已经成功上传，刷新页面或提交后可见");
+                                        } else {
+                                            toastr.error("文件上传失败："+ res.message, "上传失败", opts);
+                                            $('#dropzone').show();
+                                            $('#dropzoneMessage').hide();
+                                        }
+                                    },
+
+                                    error: function (file,errorMessage) {
+                                        toastr.error(errorMessage, "上传失败", opts);
+                                        $('#dropzone').show();
+                                        $('#dropzoneMessage').hide();
+                                    }
+                                });
+
+                                $("#advancedDropzone").css({
+                                    minHeight: 200
+                                });
+
+                            });
+
+                            function deleteAvatar() {
+                                var opts = {
+                                    "closeButton": true,
+                                    "debug": false,
+                                    "positionClass": "toast-bottom-right",
+                                    "onclick": null,
+                                    "showDuration": "300",
+                                    "hideDuration": "1000",
+                                    "timeOut": "5000",
+                                    "extendedTimeOut": "1000",
+                                    "showEasing": "swing",
+                                    "hideEasing": "linear",
+                                    "showMethod": "fadeIn",
+                                    "hideMethod": "fadeOut"
+                                };
+
+                                $.ajax({
+                                    url: "@Url.Action("Delete","File")",
+                                    method: 'POST',
+                                    dataType: 'json',
+
+                                    success: function(resp) {
+
+                                        show_loading_bar({
+                                            delay: .5,
+                                            pct: 100,
+                                            finish: function() {
+                                                if (resp.statue == "OK") {
+                                                    $("#AvatarImg").hide();
+                                                    $("#deleteAvatarTitle").html("已删除，刷新或保存后可重新上传");
+                                                    toastr.success("已删除，刷新或保存后可重新上传", "操作成功", opts);
+                                                } else {
+                                                    toastr.error("遇到错误：" + resp.message, "操作失败", opts);
+                                                }
+                                            }
+                                        });
+
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+
+                                        show_loading_bar({
+                                            delay: .5,
+                                            pct: 100,
+                                            finish: function () {
+                                                toastr.error("遇到了其他错误，请刷新页面后重试", "上传失败", opts);
+                                            }
+                                        });
+
+                                    }
+                                });
+                            }
+                        </script>
+
+
+                        <div class="row" style="text-align:center">
+
+                            @if (ViewBag.Avatar == "")
+                            {
+                                <br />
+                                <div id="dropzone" class="col-sm-12 text-center">
+
+                                    <div id="advancedDropzone" class="droppable-area">
+                                        拖动或点击上传
+                                    </div>
+
+                                </div>
+
+                                <div id="dropzoneMessage" class="col-sm-12 text-center" hidden="hidden">
+                                    <div class="alert alert-black">
+                                        <strong>文件上传</strong> <span id="fileMessage">文件正在上传，请不要再次拖动文件到上传窗</span>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-12">
+                                    <img src="@ViewBag.Avatar" id ="AvatarImg" style="height: auto;width: 159px" />
+                                </div>
+                                <div id="deleteAvatar" class="col-md-12">
+                                    <button onclick="deleteAvatar()" type="button" class="btn btn-info btn-icon btn-icon-standalone">
+                                        <i class="fa-magic"></i>
+                                        <span id="deleteAvatarTitle">删除并重新上传</span>
+                                    </button>
+                                </div>
+                            }
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="panel panel-default panel-border">
+
+                    <div class="panel-heading">
+
+                        <h3 class="panel-title">学生基本信息</h3>
+
+                    </div>
+
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            <label class="control-label" for="field-1">学生姓名</label>
+                            <input asp-for="姓名" type="text" id="TBstuname" class="form-control" maxlength="4" placeholder="姓名" autocomplete="off" />
+                            <span asp-validation-for="姓名" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">报读校区</label>
+                            <ul class="icheck-list">
+                                <li>
+                                    <input class="xiaoqu" asp-for="报读校区" type="radio" id="minimal-radio-1-15" value="B">
+                                    <label for="minimal-radio-1-15">百色分校</label>
+                                    <span asp-validation-for="报读校区" class="text-danger"></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="field-1">身份证</label>
+                            <input asp-for="身份证号" type="text" id="TBstusfzid" class="form-control" disabled="disabled" required="required" checkids="true" maxlength="18" placeholder="请如实填写身份证号码" aria-required="true" />
+                            <span asp-validation-for="身份证号" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="field-1">全国学籍号</label>
+                            <input asp-for="全国学籍号" type="text" id="TBstuxjid" maxlength="19" class="form-control" placeholder="学籍号" />
+                            <span asp-validation-for="全国学籍号" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="field-1">小学毕业学校</label>
+                            <input asp-for="毕业学校" type="text" id="TBxuexiao" class="form-control" maxlength="50" placeholder="请填写学校全称" />
+                            <p class="bg-info">请按 XX市/县 XX小学的格式填写学校全称,如:南宁市广西大学君武小学、天等县城关小学 </p>
+                            <span asp-validation-for="毕业学校" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="field-1">小学毕业学校所在地:</label>
+
+                            <script type="text/javascript">
+                                jQuery(document).ready(function ($) {
+                                    $("#DDLsyd").selectBoxIt().on('open', function () {
+                                        // Adding Custom Scrollbar
+                                        $(this).data('selectBoxSelectBoxIt').list.perfectScrollbar();
+                                    });
+                                });
+                            </script>
+
+                            <select asp-for="生源地" id="DDLsyd" class="form-control">
+                                <option value="X">请选择小学毕业学校所在地</option>
+                                <option value="A">南宁市区</option>
+                                <option value="B">南宁市属六县</option>
+                                <option value="C">桂林(包括所属县市)</option>
+                                <option value="Q">柳州(包括所属县市)</option>
+                                <option value="D">梧州(包括所属县市)</option>
+                                <option value="E">北海(包括所属县市)</option>
+                                <option value="F">防城(包括所属县市)</option>
+                                <option value="G">钦州(包括所属县市)</option>
+                                <option value="H">贵港(包括所属县市)</option>
+                                <option value="J">玉林(包括所属县市)</option>
+                                <option value="K">百色(包括所属县市)</option>
+                                <option value="L">贺州(包括所属县市)</option>
+                                <option value="M">河池(包括所属县市)</option>
+                                <option value="N">来宾(包括所属县市)</option>
+                                <option value="P">崇左(包括所属县市)</option>
+                                <option value="W">其他</option>
+                            </select>
+                            <span asp-validation-for="生源地" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="field-1">户口所在地</label>
+                            <input asp-for="户口所在地" type="text" id="TBhuji" class="form-control" maxlength="50" placeholder="请填写全称" />
+                            <p class="bg-info">以户口簿为准,如 XX市/县 XX派出所</p>
+                            <span asp-validation-for="户口所在地" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label" for="field-1">家庭详细住址</label>
+                            <input asp-for="学生实际住址" type="text" id="TBdizhi" class="form-control" maxlength="100" placeholder="请填写详细住址" />
+                            <span asp-validation-for="学生实际住址" class="text-danger"></span>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default panel-border">
+                    <div class="panel-heading">
+                        素质发展报告手册信息
+                    </div>
+                    <br />
+                    <p class="bg-info"> 下列成绩项请按《学生素质发展报告手册》如实填写。若手册中成绩不以ABCD呈现的，则按下述方法转换成相应ABCD等级进行填写<br /> 1、A+、A++、A-、AAA、AA、特优、优秀、优、优级、优+、优-、甲、甲+、甲等、90-100之间分数，均记为A。<br /> 2、B+、良好、良、80-89之间分数均记为B。<br /> 3、C+、及格、达标、60-79之间分数均记为C。<br /> 4、不及格、不达标、59分以下分数，均记为D。 </p>
+                    <div class="panel-body">
+
+
+
+                        <div class="form-group">
+
+                            <h4>五年级-上学期</h4>
+                            <div class="row">
+
+                                <div class="col-md-2">
+                                    <label class="control-label" for="full_name">语文</label>
+                                    <input asp-for="五上语文" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                    <span asp-validation-for="五上语文" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="control-label" for="full_name">数学</label>
+                                    <input asp-for="五上数学" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                    <span asp-validation-for="五上数学" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="control-label" for="full_name">英语</label>
+                                    <input asp-for="五上英语" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                    <span asp-validation-for="五上英语" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="control-label" for="full_name">思想品德</label>
+                                    <input asp-for="五上思品" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
+                                    <span asp-validation-for="五上思品" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="control-label" for="full_name">体育</label>
+                                    <input asp-for="五上体育" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
+                                    <span asp-validation-for="五上体育" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+
+                            <h4>五年级-下学期</h4>
+                            <div class="row">
+
+                                <div class="col-md-2">
+                                    <label class="control-label" for="full_name">语文</label>
+                                    <input asp-for="五下语文" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                    <span asp-validation-for="五下语文" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="control-label" for="full_name">数学</label>
+                                    <input asp-for="五下数学" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                    <span asp-validation-for="五下数学" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="control-label" for="full_name">英语</label>
+                                    <input asp-for="五下英语" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                    <span asp-validation-for="五下英语" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="control-label" for="full_name">思想品德</label>
+                                    <input asp-for="五下思品" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
+                                    <span asp-validation-for="五下思品" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="control-label" for="full_name">体育</label>
+                                    <input asp-for="五下体育" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
+                                    <span asp-validation-for="五下体育" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+
+                            <h4>六年级-上学期</h4>
+                            <div class="row">
+
+                                <div class="col-md-2">
+                                    <label class="control-label" for="full_name">语文</label>
+                                    <input asp-for="六上语文" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                    <span asp-validation-for="六上语文" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="control-label" for="full_name">数学</label>
+                                    <input asp-for="六上数学" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                    <span asp-validation-for="六上数学" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="control-label" for="full_name">英语</label>
+                                    <input asp-for="六上英语" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                    <span asp-validation-for="六上英语" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="control-label" for="full_name">思想品德</label>
+                                    <input asp-for="六上思品" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
+                                    <span asp-validation-for="六上思品" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="control-label" for="full_name">体育</label>
+                                    <input asp-for="六上体育" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
+                                    <span asp-validation-for="六上体育" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="panel panel-default  panel-border">
+                    <div class="panel-heading">
+
+                        <h3 class="panel-title">学生荣誉获得情况 </h3>
+
+                    </div>
+
+                    <div class="panel-body">
+
+
+
+                        <div class="form-group">
+
+                            <h4>五年级</h4>
+
+                            <div class="form-group">
+
+                                <div class="row">
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">市级三好学生获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="五市三好" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="五市三好" class="text-danger"></span>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">市级优秀少先队员获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="五市优少" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="五市优少" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">市级优秀学生干部获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="五市优干" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="五市优干" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">县级三好学生获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="五县三好" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="五县三好" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">县级优秀少先队员获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="五县优少" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="五县优少" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">县级优秀学生干部获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="五县优干" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="五县优干" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">校级三好学生获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="五校三好" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="五校三好" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">校级优秀少先队员获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="五校优少" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="五校优少" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">校级优秀学生干部获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="五校优干" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="五校优干" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+
+                            <h4>六年级</h4>
+
+                            <div class="form-group">
+
+                                <div class="row">
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">市级三好学生获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="六市三好" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="六市三好" class="text-danger"></span>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">市级优秀少先队员获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="六市优少" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="六市优少" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">市级优秀学生干部获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="六市优干" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="六市优干" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">县级三好学生获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="六县三好" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="六县三好" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">县级优秀少先队员获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="六县优少" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="六县优少" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">县级优秀学生干部获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="六县优干" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="六县优干" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">校级三好学生获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="六校三好" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="六校三好" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">校级优秀少先队员获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="六校优少" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="六校优少" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <label class="control-label">校级优秀学生干部获奖次数</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="六校优干" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="六校优干" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+
+                            <h4>其他荣誉</h4>
+
+                            <div class="form-group">
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+
+                                        <label class="control-label">其它获奖次数一</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="其它获奖次数一" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="其它获奖次数一" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                        <label class="control-label">其它获奖次数二</label>
+
+                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
+                                        <div class="input-group spinner" data-step="1">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="decrement">-</button>
+                                            </span>
+                                            <input asp-for="其它获奖次数二" type="text" class="form-control text-center" />
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-gray" data-type="increment">+</button>
+                                            </span>
+                                        </div>
+                                        <span asp-validation-for="其它获奖次数二" class="text-danger"></span>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="panel panel-default panel-border">
+                    <div class="panel-heading">
+                        学生家长信息
+                    </div>
+
+                    <div class="panel-body">
+
+
+
+                        <div class="form-group">
+
+                            <h4>父亲信息</h4>
+                            <br />
+                            <div class="row">
+
+                                <div class="form-group">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label" for="full_name">姓名</label>
+                                        <input asp-for="父亲姓名" type="text" id="TB51pd" class="form-control" placeholder="姓名" />
+                                        <span asp-validation-for="父亲姓名" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-3">
+
+                                        <label class="control-label" for="full_name">学历</label>
+
+                                        <select asp-for="父亲学历" id="DDLfxl8" class="form-control">
+                                            <option value="博士研究生">博士研究生</option>
+                                            <option value="硕士研究生">硕士研究生</option>
+                                            <option value="本科">本科</option>
+                                            <option value="本科以下">本科以下</option>
+                                        </select>
+                                        <span asp-validation-for="父亲学历" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="full_name">工作单位</label>
+                                        <input asp-for="父亲工作单位" type="text" id="TB51pd" class="form-control" placeholder="工作单位地址" />
+                                        <span asp-validation-for="父亲工作单位" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+
+                                <br /><br /><br />
+
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="full_name">职务</label>
+                                        <select asp-for="父亲职务" id="DDLfzhiwu" class="form-control">
+                                            <option value="负责人">负责人</option>
+                                            <option value="普通职员">普通职员</option>
+                                        </select>
+                                        <span asp-validation-for="父亲职务" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="full_name">联系电话</label>
+                                        <input asp-for="父亲电话" type="text" id="TB51pd" class="form-control" placeholder="联系电话" />
+                                        <span asp-validation-for="父亲电话" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+
+                            <h4>母亲信息</h4>
+                            <br />
+                            <div class="row">
+
+                                <div class="form-group">
+
+                                    <div class="col-md-3">
+                                        <label class="control-label" for="full_name">姓名</label>
+                                        <input asp-for="母亲姓名" type="text" id="TB51pd" class="form-control" placeholder="姓名" />
+                                        <span asp-validation-for="母亲姓名" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-3">
+
+                                        <label class="control-label" for="full_name">学历</label>
+
+                                        <select asp-for="母亲学历" id="DDLfxl8" class="form-control">
+                                            <option value="博士研究生">博士研究生</option>
+                                            <option value="硕士研究生">硕士研究生</option>
+                                            <option value="本科">本科</option>
+                                            <option value="本科以下">本科以下</option>
+                                        </select>
+                                        <span asp-validation-for="母亲学历" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="full_name">工作单位</label>
+                                        <input asp-for="母亲工作单位" type="text" id="TB51pd" class="form-control" placeholder="工作单位地址" />
+                                        <span asp-validation-for="母亲工作单位" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+
+                                <br /><br /><br />
+
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="full_name">职务</label>
+                                        <select asp-for="母亲职务" id="DDLfzhiwu" class="form-control">
+                                            <option value="负责人">负责人</option>
+                                            <option value="普通职员">普通职员</option>
+                                        </select>
+                                        <span asp-validation-for="母亲职务" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="full_name">联系电话</label>
+                                        <input asp-for="母亲电话" type="text" id="TB51pd" class="form-control" placeholder="联系电话" />
+                                        <span asp-validation-for="母亲电话" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+
+                            <h4>住宅电话</h4>
+                            <br />
+                            <label class="control-label">固定电话</label>
+                            <input asp-for="住宅电话" type="text" id="TBhomephone" maxlength="11" class="form-control" />
+                            <p class="bg-info">请加上区号,电话格式如：07713235672</p>
+                            <span asp-validation-for="住宅电话" class="text-danger"></span>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default panel-border">
+
+                    <div class="panel-heading">
+                        信息提交
+                    </div>
+                    @if (Model.信息状态 == "已锁定")
+                    {
+                        <p class="bg-danger">
+                            您的信息已被锁定，如一定要修改，请联系管理员。
+                        </p>
+                    }
+                    else
+                    {
+                        <p class="bg-danger">
+                            请仔细核对信息，避免录入错误，报名信息一旦错误，后果自负！
+                        </p>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-info btn-icon btn-icon-standalone">
+                                <i class="fa-magic"></i>
+                                <span>提交并保存</span>
+                            </button>
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+    </form>
+</div>
+
+@section StuAddInfoFooter{
+    <!-- Imported styles on this page -->
+    <link rel="stylesheet" href="~/js/select2/select2.css">
+    <link rel="stylesheet" href="~/js/select2/select2-bootstrap.css">
+    <link rel="stylesheet" href="~/css/fonts/meteocons/css/meteocons.css">
+    <link rel="stylesheet" href="~/js/dropzone/css/dropzone.css">
+    <link rel="stylesheet" href="~/js/icheck/skins/all.css">
+
+    <!-- Imported scripts on this page -->
+    <script src="~/js/select2/select2.min.js"></script>
+    <script src="~/js/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/js/selectboxit/jquery.selectBoxIt.min.js"></script>
+    <script src="~/js/typeahead.bundle.js"></script>
+    <script src="~/js/handlebars.min.js"></script>
+    <script src="~/js/icheck/icheck.min.js"></script>
+    <script src="~/js/icheck/icheck.min.js"></script>
+
+    <!-- Bottom Scripts -->
+    <script src="~/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/js/TweenMax.min.js" type="text/javascript"></script>
+    <script src="~/js/resizeable.js" type="text/javascript"></script>
+    <script src="~/js/joinable.js" type="text/javascript"></script>
+    <script src="~/js/xenon-api.js" type="text/javascript"></script>
+    <script src="~/js/xenon-toggles.js" type="text/javascript"></script>
+    <script src="~/js/jquery-validate/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/toastr/toastr.min.js" type="text/javascript"></script>
+
+    <!-- Imported scripts on this page -->
+    <script src="~/js/dropzone/dropzone.min.js"></script>
+
+    <!-- JavaScripts initializations and stuff -->
+    <script src="~/js/xenon-custom.js" type="text/javascript"></script>
+}
