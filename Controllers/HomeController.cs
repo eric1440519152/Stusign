@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -32,7 +32,7 @@ namespace Stusign.Controllers
             var stuinfo = await _context.Stuinfo.AsNoTracking().FirstAsync(e => e.编号==uid);
 
             ViewBag.FileSizeMax = 5;
-            ViewBag.Avatar = stuinfo.头像文件 == ""?"":Url.Action("Avatar","File");
+            ViewBag.Avatar = (stuinfo.头像文件 == "")||(stuinfo.头像文件 == null)?"":Url.Action("Avatar","File");
             ViewBag.Print = _systemOptions.打印开放 && (bool)stuinfo.审核结果;
 
             IndexViewModel indexView = new IndexViewModel();
