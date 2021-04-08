@@ -120,7 +120,8 @@
                                     method: "post",  //也可用put
                                     maxFiles: 1,//一次性上传的文件数量上限
                                     maxFilesize: @ViewBag.FileSizeMax, //MB
-                                    acceptedFiles: ".jpg", //上传的类型
+                                    acceptedFiles: "image/*", //上传的类型
+                                    resizeMimeType: "image/jpeg",
                                     parallelUploads: 3,
                                     dictMaxFilesExceeded: "您最多只能上传1个文件！",
                                     dictResponseError: '文件上传失败!',
@@ -199,7 +200,7 @@
                                             finish: function() {
                                                 if (resp.statue == "OK") {
                                                     $("#AvatarImg").hide();
-                                                    $("#deleteAvatarTitle").html("已删除，刷新或保存后可重新上传");
+                                                    $("#deleteAvatarTitle").html("已删除，保存后可重新上传");
                                                     toastr.success("已删除，刷新或保存后可重新上传", "操作成功", opts);
                                                 } else {
                                                     toastr.error("遇到错误：" + resp.message, "操作失败", opts);
@@ -250,7 +251,7 @@
                                 </div>
                                 <div id="deleteAvatar" class="col-md-12">
                                     <button onclick="deleteAvatar()" type="button" class="btn btn-info btn-icon btn-icon-standalone">
-                                        <i class="fa-magic"></i>
+                                        <i class="fa-image"></i>
                                         <span id="deleteAvatarTitle">删除并重新上传</span>
                                     </button>
                                 </div>
@@ -311,33 +312,23 @@
                         <div class="form-group">
                             <label class="control-label" for="field-1">小学毕业学校所在地:</label>
 
-                            <script type="text/javascript">
-                                jQuery(document).ready(function ($) {
-                                    $("#DDLsyd").selectBoxIt().on('open', function () {
-                                        // Adding Custom Scrollbar
-                                        $(this).data('selectBoxSelectBoxIt').list.perfectScrollbar();
-                                    });
-                                });
-                            </script>
 
                             <select asp-for="生源地" id="DDLsyd" class="form-control">
                                 <option value="X">请选择小学毕业学校所在地</option>
-                                <option value="A">南宁市区</option>
-                                <option value="B">南宁市属六县</option>
-                                <option value="C">桂林(包括所属县市)</option>
-                                <option value="Q">柳州(包括所属县市)</option>
-                                <option value="D">梧州(包括所属县市)</option>
-                                <option value="E">北海(包括所属县市)</option>
-                                <option value="F">防城(包括所属县市)</option>
-                                <option value="G">钦州(包括所属县市)</option>
-                                <option value="H">贵港(包括所属县市)</option>
-                                <option value="J">玉林(包括所属县市)</option>
-                                <option value="K">百色(包括所属县市)</option>
-                                <option value="L">贺州(包括所属县市)</option>
-                                <option value="M">河池(包括所属县市)</option>
-                                <option value="N">来宾(包括所属县市)</option>
-                                <option value="P">崇左(包括所属县市)</option>
-                                <option value="W">其他</option>
+                                <option value="A">右江区</option>
+                                <option value="B">田阳区</option>
+                                <option value="C">田东县</option>
+                                <option value="D">隆林县</option>
+                                <option value="E">德保县</option>
+                                <option value="F">田林县</option>
+                                <option value="G">凌云县</option>
+                                <option value="H">那坡县</option>
+                                <option value="I">乐业县</option>
+                                <option value="J">西林县</option>
+                                <option value="K">靖西市</option>
+                                <option value="L">平果市</option>
+                                <option value="M">南宁</option>
+                                <option value="N">其他</option>
                             </select>
                             <span asp-validation-for="生源地" class="text-danger"></span>
                         </div>
@@ -1072,7 +1063,7 @@
 
                         <div class="text-right">
                             <button type="submit" class="btn btn-info btn-icon btn-icon-standalone">
-                                <i class="fa-magic"></i>
+                                <i class="fa-save"></i>
                                 <span>提交并保存</span>
                             </button>
                         </div>
@@ -1098,24 +1089,19 @@
     <script src="~/js/select2/select2.min.js"></script>
     <script src="~/js/jquery-ui/jquery-ui.min.js"></script>
     <script src="~/js/selectboxit/jquery.selectBoxIt.min.js"></script>
-    <script src="~/js/typeahead.bundle.js"></script>
     <script src="~/js/handlebars.min.js"></script>
     <script src="~/js/icheck/icheck.min.js"></script>
-    <script src="~/js/icheck/icheck.min.js"></script>
+    <script src="~/js/dropzone/dropzone.min.js"></script>
 
     <!-- Bottom Scripts -->
     <script src="~/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="~/js/TweenMax.min.js" type="text/javascript"></script>
-    <script src="~/js/resizeable.js" type="text/javascript"></script>
     <script src="~/js/joinable.js" type="text/javascript"></script>
     <script src="~/js/xenon-api.js" type="text/javascript"></script>
     <script src="~/js/xenon-toggles.js" type="text/javascript"></script>
     <script src="~/js/jquery-validate/jquery.validate.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/jquery-validate/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
     <script src="~/js/toastr/toastr.min.js" type="text/javascript"></script>
-
-    <!-- Imported scripts on this page -->
-    <script src="~/js/dropzone/dropzone.min.js"></script>
 
     <!-- JavaScripts initializations and stuff -->
     <script src="~/js/xenon-custom.js" type="text/javascript"></script>

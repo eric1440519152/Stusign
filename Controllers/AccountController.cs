@@ -156,7 +156,8 @@ namespace Stusign.Controllers
                 {
                     _message = "恭喜您注册成功！请您牢记以下信息</br>登记编号：<strong>" + userinfo.编号.ToString() +
                                "</strong></br>注册手机号：<strong>" + regPhone +
-                               "</strong></br>密码：<strong>身份证后六位</strong>";
+                               "</strong></br>密码：<strong>身份证后六位</strong>"+
+                               "</br>请立即登录填写基本信息";
                     _status = "Succeeded";
                     _actionName = "ShowMessage";
                 }

@@ -23,6 +23,7 @@ namespace Stusign.ViewModels.Home
         [Required(ErrorMessage = "该项必填")]
         public string 报读校区 { get; set; }
         [Required(ErrorMessage = "该项必填")]
+        [RegularExpression(@"^[A-N]+$",ErrorMessage = "该项必填")]
         public string 生源地 { get; set; }
         [Required(ErrorMessage = "该项必填")]
         public string 户口所在地 { get; set; }
