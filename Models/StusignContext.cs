@@ -104,13 +104,15 @@ namespace Stusign.Models
 
                 entity.Property(e => e.六校优干).HasMaxLength(1);
 
-                entity.Property(e => e.其它获奖次数一).HasMaxLength(2);
-
-                entity.Property(e => e.其它获奖次数二).HasMaxLength(100);
-
                 entity.Property(e => e.出生年月).HasMaxLength(20);
 
                 entity.Property(e => e.姓名).HasMaxLength(8);
+
+                entity.Property(e => e.兴趣爱好).HasMaxLength(10);
+
+                entity.Property(e => e.兴趣爱好荣誉).HasMaxLength(100);
+
+                entity.Property(e => e.学生职务).HasMaxLength(20);
 
                 entity.Property(e => e.学生实际住址).HasMaxLength(100);
 
@@ -142,13 +144,13 @@ namespace Stusign.Models
                     .HasMaxLength(10)
                     .HasDefaultValue("2");
 
-                entity.Property(e => e.材料等级).HasMaxLength(1);
-
                 entity.Property(e => e.母亲姓名).HasMaxLength(8);
 
                 entity.Property(e => e.母亲学历).HasMaxLength(8);
 
                 entity.Property(e => e.母亲工作单位).HasMaxLength(80);
+
+                entity.Property(e => e.母亲职业类别).HasMaxLength(50);
 
                 entity.Property(e => e.母亲电话).HasMaxLength(11);
 
@@ -163,6 +165,8 @@ namespace Stusign.Models
                 entity.Property(e => e.父亲学历).HasMaxLength(8);
 
                 entity.Property(e => e.父亲工作单位).HasMaxLength(100);
+
+                entity.Property(e => e.父亲职业类别).HasMaxLength(50);
 
                 entity.Property(e => e.父亲电话).HasMaxLength(11);
 

@@ -247,7 +247,7 @@
                             else
                             {
                                 <div class="col-md-12">
-                                    <img src="@ViewBag.Avatar" id ="AvatarImg" style="height: auto;width: 159px" />
+                                    <img src="@ViewBag.Avatar" id="AvatarImg" style="height: auto;width: 159px" />
                                 </div>
                                 <div id="deleteAvatar" class="col-md-12">
                                     <button onclick="deleteAvatar()" type="button" class="btn btn-info btn-icon btn-icon-standalone">
@@ -844,52 +844,54 @@
 
                         <div class="form-group-separator"></div>
 
+
                         <div class="form-group">
 
-                            <h4>其他荣誉</h4>
+                            <h4>兴趣爱好类</h4>
 
                             <div class="form-group">
 
                                 <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
 
-                                    <div class="col-md-6">
+                                            <label class="control-label" for="full_name">兴趣爱好</label>
+                                            <input asp-for="兴趣爱好" type="text" class="form-control" id="tagsinput-1" data-role="tagsinput" value="样例标签2（请删除）,样例标签2（请删除）" />
+                                            <p class="bg-info">请输入您的兴趣爱好,每一个输入后用回车键确认</p>
 
-                                        <label class="control-label">其它获奖次数一</label>
-
-                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
-                                        <div class="input-group spinner" data-step="1">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-gray" data-type="decrement">-</button>
-                                            </span>
-                                            <input asp-for="其它获奖次数一" type="text" class="form-control text-center" />
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-gray" data-type="increment">+</button>
-                                            </span>
                                         </div>
-                                        <span asp-validation-for="其它获奖次数一" class="text-danger"></span>
                                     </div>
+                                    <div class="form-group">
+                                        <div class="col-md-12">
 
-                                    <div class="col-md-6">
+                                            <label class="control-label" for="full_name">五、六年级取得兴趣爱好类荣誉</label>
+                                            <input asp-for="兴趣爱好荣誉" type="text" class="form-control" id="tagsinput-1" data-role="tagsinput" value="样例标签2（请删除）,样例标签2（请删除）" />
+                                            <p class="bg-info">请选择您认为最重要的荣誉填写,不超过三项,每一个输入后用回车键确认</p>
 
-                                        <label class="control-label">其它获奖次数二</label>
-
-                                        <!-- Input spinner, just add class "spinner" to input-group and it will be activated -->
-                                        <div class="input-group spinner" data-step="1">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-gray" data-type="decrement">-</button>
-                                            </span>
-                                            <input asp-for="其它获奖次数二" type="text" class="form-control text-center" />
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-gray" data-type="increment">+</button>
-                                            </span>
                                         </div>
-                                        <span asp-validation-for="其它获奖次数二" class="text-danger"></span>
                                     </div>
-
-
                                 </div>
 
                             </div>
+
+                        </div>
+
+                        <div class="form-group-separator"></div>
+
+                        <div class="form-group">
+
+                            <h4>学生职务</h4>
+
+                            <select asp-for="学生职务" id="DDLsyd2" class="form-control">
+                                <option value="无">无</option>
+                                <option value="有校级职务但无班级职务">有校级职务但无班级职务</option>
+                                <option value="班长">班长</option>
+                                <option value="学习委员">学习委员</option>
+                                <option value="体育委员">体育委员</option>
+                                <option value="劳动委员">劳动委员</option>
+                                <option value="文艺委员">文艺委员</option>
+                                <option value="其他">其他</option>
+                            </select>
 
                         </div>
 
@@ -1102,6 +1104,7 @@
     <script src="~/js/jquery-validate/jquery.validate.min.js" type="text/javascript"></script>
     <script src="~/js/jquery-validate/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
     <script src="~/js/toastr/toastr.min.js" type="text/javascript"></script>
+    <script src="~/js/tagsinput/bootstrap-tagsinput.min.js"></script>
 
     <!-- JavaScripts initializations and stuff -->
     <script src="~/js/xenon-custom.js" type="text/javascript"></script>

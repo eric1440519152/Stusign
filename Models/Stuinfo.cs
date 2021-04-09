@@ -35,9 +35,6 @@ namespace Stusign.Models
         public string 六市优少 { get; set; }
         public string 六县优少 { get; set; }
         public string 六校优少 { get; set; }
-        public string 其它获奖次数一 { get; set; }
-        public string 其它获奖次数二 { get; set; }
-        public string 材料等级 { get; set; }
         public string 五上思品 { get; set; }
         public string 五上语文 { get; set; }
         public string 五上数学 { get; set; }
@@ -58,12 +55,17 @@ namespace Stusign.Models
         public string 父亲电话 { get; set; }
         public string 父亲职务 { get; set; }
         public string 父亲工作单位 { get; set; }
+        public string 父亲职业类别 { get; set; }
         public string 母亲姓名 { get; set; }
         public string 母亲学历 { get; set; }
         public string 母亲电话 { get; set; }
         public string 母亲职务 { get; set; }
         public string 母亲工作单位 { get; set; }
+        public string 母亲职业类别 { get; set; }
         public string 住宅电话 { get; set; }
+        public string 兴趣爱好 { get; set; }
+        public string 兴趣爱好荣誉 { get; set; }
+        public string 学生职务 { get; set; }
         public DateTime? 登记时间 { get; set; }
         public string 登记地址 { get; set; }
         public string 操作状态 { get; set; }

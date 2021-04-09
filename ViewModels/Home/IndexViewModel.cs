@@ -83,8 +83,12 @@ namespace Stusign.ViewModels.Home
         [Required(ErrorMessage = "该项必填")]
         [Range(0,9,ErrorMessage = "范围异常")]
         public string 六校优少 { get; set; }
-        public string 其它获奖次数一 { get; set; }
-        public string 其它获奖次数二 { get; set; }
+        public string 兴趣爱好 { get; set; }
+        public string 兴趣爱好荣誉 { get; set; }
+        public string 学生职务 { get; set; }
+        public string 父亲职业类别 { get; set; }
+        public string 母亲职业类别 { get; set; }
+
         [Required(ErrorMessage = "该项必填")]
         [RegularExpression(@"^[A-D]+$",ErrorMessage = "限填A B C D")]
         public string 五上思品 { get; set; }
@@ -177,8 +181,11 @@ namespace Stusign.ViewModels.Home
             stuinfo.六市优少 = 六市优少;
             stuinfo.六县优少 = 六县优少;
             stuinfo.六校优少 = 六校优少;
-            stuinfo.其它获奖次数一 = 其它获奖次数一;
-            stuinfo.其它获奖次数二 = 其它获奖次数二;
+            stuinfo.母亲职业类别 = 母亲职业类别;
+            stuinfo.父亲职业类别 = 父亲职业类别;
+            stuinfo.学生职务 = 学生职务;
+            stuinfo.兴趣爱好 = 兴趣爱好;
+            stuinfo.兴趣爱好荣誉 = 兴趣爱好荣誉;
             stuinfo.五上思品 = 五上思品;
             stuinfo.五上语文 = 五上语文;
             stuinfo.五上数学 = 五上数学;
@@ -241,8 +248,11 @@ namespace Stusign.ViewModels.Home
             六市优少 = stuinfo.六市优少;
             六县优少 = stuinfo.六县优少;
             六校优少 = stuinfo.六校优少;
-            其它获奖次数一 = stuinfo.其它获奖次数一;
-            其它获奖次数二 = stuinfo.其它获奖次数二;
+            母亲职业类别 = stuinfo.母亲职业类别;
+            父亲职业类别 = stuinfo.父亲职业类别;
+            学生职务 = stuinfo.学生职务;
+            兴趣爱好 = stuinfo.兴趣爱好;
+            兴趣爱好荣誉 = stuinfo.兴趣爱好荣誉;
             五上思品 = stuinfo.五上思品;
             五上语文 = stuinfo.五上语文;
             五上数学 = stuinfo.五上数学;
