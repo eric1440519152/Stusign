@@ -30,58 +30,58 @@ namespace Stusign.ViewModels.Home
         [Required(ErrorMessage = "该项必填")]
         public string 学生实际住址 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 五市三好 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 五县三好 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 五校三好 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 五市优干 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 五县优干 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 五校优干 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 五市优少 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 五县优少 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 五校优少 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 六市三好 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 六县三好 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 六校三好 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 六市优干 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 六县优干 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 六校优干 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 六市优少 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 六县优少 { get; set; }
         [Required(ErrorMessage = "该项必填")]
-        [Range(0,9,ErrorMessage = "范围异常")]
+        [Range(0,2,ErrorMessage = "范围异常")]
         public string 六校优少 { get; set; }
         public string 兴趣爱好 { get; set; }
         public string 兴趣爱好荣誉 { get; set; }
@@ -147,9 +147,11 @@ namespace Stusign.ViewModels.Home
         public string 母亲职务 { get; set; }
         public string 母亲工作单位 { get; set; }
         public string 住宅电话 { get; set; }
-        [ReadOnly(true)]
+        [ReadOnly(true)] 
         public string 信息状态 { get; set; }
 
+        [ReadOnly(true)]
+        public string 错误信息 { get; set; }
 
         public Stuinfo To(Stuinfo stuinfo)
         {

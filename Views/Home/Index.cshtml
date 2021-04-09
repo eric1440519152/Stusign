@@ -96,7 +96,7 @@
                     <div class="panel-body">
 
                         <script type="text/javascript">
-                            jQuery(document).ready(function ($) {
+                            jQuery(document).ready(function($) {
 
                                 var opts = {
                                     "closeButton": true,
@@ -112,6 +112,10 @@
                                     "showMethod": "fadeIn",
                                     "hideMethod": "fadeOut"
                                 };
+
+                                if ("@Model.错误信息" != "") {
+                                    toastr.error("@Model.错误信息", "提交错误", opts);
+                                }
 
                                 var i = 1;
 
