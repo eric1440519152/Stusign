@@ -92,6 +92,8 @@ namespace Stusign
                 options.SlidingExpiration = true;
             });
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddScoped<SystemOptions>();
             services.AddScoped<reCAPTCHA>();
             services.AddScoped<reCaptchaValid>();

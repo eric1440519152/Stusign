@@ -3218,12 +3218,12 @@ button.toast-close-button {
 .login-page .external-login a:hover {
   background: #454849;
 }
-.login-page .external-login a.facebook {
-  background-color: #3b5998;
-}
-.login-page .external-login a.facebook:hover {
-  background-color: #2d4373;
-}
+    .login-page .external-login a.facebook {
+        background-color: #68b828;
+    }
+    .login-page .external-login a.facebook:hover {
+        background-color: #619b33;
+    }
 .login-page .external-login a.twitter {
   background-color: #55acee;
 }

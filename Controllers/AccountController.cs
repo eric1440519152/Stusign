@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,15 +22,17 @@ namespace Stusign.Controllers
         private readonly StusignContext _context;
         private readonly DbSet<Stuinfo> _stuinfo;
         private readonly SystemOptions _systemOptions;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly reCAPTCHA reCaptcha;
 
-        public AccountController(SystemOptions systemOptions,UserManager<IdentityUser> userManager,SignInManager<IdentityUser> signInManager,StusignContext context)
+        public AccountController(SystemOptions systemOptions,UserManager<IdentityUser> userManager,IHttpContextAccessor httpContextAccessor,SignInManager<IdentityUser> signInManager,StusignContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
             _stuinfo = _context.Stuinfo;
             _systemOptions = systemOptions;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public IActionResult Index(string error = "")
@@ -133,12 +136,15 @@ namespace Stusign.Controllers
                 else
                     sex = "女";
 
+                string ipaddress = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
+
                 var userinfo = new Stuinfo
                 {
                     姓名 = regStuName,
                     身份证号 = regIDCard,
                     性别 = sex,
-                    出生年月 = regIDCard.Substring(6, 8)
+                    出生年月 = regIDCard.Substring(6, 8),
+                    登记地址 = ipaddress
                 };
                 _context.Stuinfo.Add(userinfo);
                 await _context.SaveChangesAsync();

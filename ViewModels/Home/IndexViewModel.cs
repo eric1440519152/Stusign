@@ -83,7 +83,9 @@ namespace Stusign.ViewModels.Home
         [Required(ErrorMessage = "该项必填")]
         [Range(0,2,ErrorMessage = "范围异常")]
         public string 六校优少 { get; set; }
+        [MaxLength(10,ErrorMessage = "长度过长")]
         public string 兴趣爱好 { get; set; }
+        [MaxLength(100,ErrorMessage = "长度过长")]
         public string 兴趣爱好荣誉 { get; set; }
         public string 学生职务 { get; set; }
         public string 父亲职业类别 { get; set; }

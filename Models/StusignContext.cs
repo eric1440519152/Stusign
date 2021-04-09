@@ -52,23 +52,23 @@ namespace Stusign.Models
 
                 entity.Property(e => e.五下语文).HasMaxLength(3);
 
-                entity.Property(e => e.五县三好).HasMaxLength(1);
+                entity.Property(e => e.五县三好).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.五县优少).HasMaxLength(1);
+                entity.Property(e => e.五县优少).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.五县优干).HasMaxLength(1);
+                entity.Property(e => e.五县优干).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.五市三好).HasMaxLength(1);
+                entity.Property(e => e.五市三好).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.五市优少).HasMaxLength(1);
+                entity.Property(e => e.五市优少).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.五市优干).HasMaxLength(1);
+                entity.Property(e => e.五市优干).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.五校三好).HasMaxLength(1);
+                entity.Property(e => e.五校三好).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.五校优少).HasMaxLength(1);
+                entity.Property(e => e.五校优少).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.五校优干).HasMaxLength(1);
+                entity.Property(e => e.五校优干).HasMaxLength(1).HasDefaultValue("0");
 
                 entity.Property(e => e.住宅电话).HasMaxLength(11);
 
@@ -86,23 +86,23 @@ namespace Stusign.Models
 
                 entity.Property(e => e.六上语文).HasMaxLength(3);
 
-                entity.Property(e => e.六县三好).HasMaxLength(1);
+                entity.Property(e => e.六县三好).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.六县优少).HasMaxLength(1);
+                entity.Property(e => e.六县优少).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.六县优干).HasMaxLength(1);
+                entity.Property(e => e.六县优干).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.六市三好).HasMaxLength(1);
+                entity.Property(e => e.六市三好).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.六市优少).HasMaxLength(1);
+                entity.Property(e => e.六市优少).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.六市优干).HasMaxLength(1);
+                entity.Property(e => e.六市优干).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.六校三好).HasMaxLength(1);
+                entity.Property(e => e.六校三好).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.六校优少).HasMaxLength(1);
+                entity.Property(e => e.六校优少).HasMaxLength(1).HasDefaultValue("0");
 
-                entity.Property(e => e.六校优干).HasMaxLength(1);
+                entity.Property(e => e.六校优干).HasMaxLength(1).HasDefaultValue("0");
 
                 entity.Property(e => e.出生年月).HasMaxLength(20);
 
@@ -136,7 +136,7 @@ namespace Stusign.Models
 
                 entity.Property(e => e.打印时间).HasColumnType("datetime");
 
-                entity.Property(e => e.报读校区).HasMaxLength(1);
+                entity.Property(e => e.报读校区).HasMaxLength(1).HasDefaultValue("B");
 
                 entity.Property(e => e.操作人员).HasMaxLength(10);
 
