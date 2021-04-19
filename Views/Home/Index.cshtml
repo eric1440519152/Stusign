@@ -65,8 +65,8 @@
                         <div class="xe-widget xe-counter xe-counter-blue">
 
                             <div class="xe-label">
-                                <strong class="num">@Model.编号</strong>
-                                <span>登记编号</span>
+                                <strong class="num text-danger">@Model.编号</strong>
+                                <span class="text-danger">登记编号 密码为身份证号后六位</span>
                             </div>
                         </div>
 
@@ -77,8 +77,8 @@
                         <div class="xe-widget xe-counter ">
 
                             <div class="xe-label">
-                                <strong class="num">@Model.信息状态</strong>
-                                <span>报名状态</span>
+                                <strong class="num text-danger">请牢记左侧登记号</strong>
+                                <span class="text-danger">可用登记号及身份证后六位登录管理个人信息</span>
                             </div>
                         </div>
 
@@ -89,7 +89,7 @@
 
                     <div class="panel-heading">
                         <h3 class="panel-title">
-                            学生一寸免冠照
+                            学生一寸免冠照*
                         </h3>
                     </div>
 
@@ -115,6 +115,10 @@
 
                                 if ("@Model.错误信息" != "") {
                                     toastr.error("@Model.错误信息", "提交错误", opts);
+                                }
+
+                                if ("@Model.提示信息" != "") {
+                                    toastr.success("@Model.提示信息", "提交成功", opts);
                                 }
 
                                 var i = 1;
@@ -278,13 +282,13 @@
                     <div class="panel-body">
 
                         <div class="form-group">
-                            <label class="control-label" for="field-1">学生姓名</label>
+                            <label class="control-label" for="field-1">学生姓名*</label>
                             <input asp-for="姓名" type="text" id="TBstuname" class="form-control" maxlength="4" placeholder="姓名" autocomplete="off" />
                             <span asp-validation-for="姓名" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label">报读校区</label>
+                            <label class="control-label">报读校区*</label>
                             <ul class="icheck-list">
                                 <li>
                                     <input class="xiaoqu" asp-for="报读校区" type="radio" id="minimal-radio-1-15" value="B">
@@ -295,26 +299,26 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="field-1">身份证</label>
+                            <label class="control-label" for="field-1">身份证*</label>
                             <input asp-for="身份证号" type="text" id="TBstusfzid" class="form-control" disabled="disabled" required="required" checkids="true" maxlength="18" placeholder="请如实填写身份证号码" aria-required="true" />
                             <span asp-validation-for="身份证号" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="field-1">全国学籍号</label>
+                            <label class="control-label" for="field-1">全国学籍号*</label>
                             <input asp-for="全国学籍号" type="text" id="TBstuxjid" maxlength="19" class="form-control" placeholder="学籍号" />
                             <span asp-validation-for="全国学籍号" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="field-1">小学毕业学校</label>
+                            <label class="control-label" for="field-1">小学毕业学校*</label>
                             <input asp-for="毕业学校" type="text" id="TBxuexiao" class="form-control" maxlength="50" placeholder="请填写学校全称" />
                             <p class="bg-info">请按 XX市/县 XX小学的格式填写学校全称,如:南宁市广西大学君武小学、天等县城关小学 </p>
                             <span asp-validation-for="毕业学校" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="field-1">小学毕业学校所在地:</label>
+                            <label class="control-label" for="field-1">小学毕业学校所在地*</label>
 
 
                             <select asp-for="生源地" id="DDLsyd" class="form-control">
@@ -338,14 +342,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="field-1">户口所在地</label>
+                            <label class="control-label" for="field-1">户口所在地*</label>
                             <input asp-for="户口所在地" type="text" id="TBhuji" class="form-control" maxlength="50" placeholder="请填写全称" />
                             <p class="bg-info">以户口簿为准,如 XX市/县 XX派出所</p>
                             <span asp-validation-for="户口所在地" class="text-danger"></span>
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="field-1">家庭详细住址</label>
+                            <label class="control-label" for="field-1">家庭详细住址*</label>
                             <input asp-for="学生实际住址" type="text" id="TBdizhi" class="form-control" maxlength="100" placeholder="请填写详细住址" />
                             <span asp-validation-for="学生实际住址" class="text-danger"></span>
                         </div>
@@ -362,134 +366,133 @@
                     </div>
                     <br />
                     <p class="bg-info"> 下列成绩项请按《学生素质发展报告手册》如实填写。若手册中成绩不以ABCD呈现的，则按下述方法转换成相应ABCD等级进行填写<br /> 1、A+、A++、A-、AAA、AA、特优、优秀、优、优级、优+、优-、甲、甲+、甲等、90-100之间分数，均记为A。<br /> 2、B+、良好、良、80-89之间分数均记为B。<br /> 3、C+、及格、达标、60-79之间分数均记为C。<br /> 4、不及格、不达标、59分以下分数，均记为D。 </p>
+                    <p class="bg-danger"> 以下内容限填写 A B C D</p>
                     <div class="panel-body">
 
+                            <div class="form-group">
 
+                                <h4>五年级-上学期</h4>
+                                <div class="row">
 
-                        <div class="form-group">
+                                    <div class="col-md-2">
+                                        <label class="control-label" for="full_name">语文*</label>
+                                        <input asp-for="五上语文" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                        <span asp-validation-for="五上语文" class="text-danger"></span>
+                                    </div>
 
-                            <h4>五年级-上学期</h4>
-                            <div class="row">
+                                    <div class="col-md-2">
+                                        <label class="control-label" for="full_name">数学*</label>
+                                        <input asp-for="五上数学" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                        <span asp-validation-for="五上数学" class="text-danger"></span>
+                                    </div>
 
-                                <div class="col-md-2">
-                                    <label class="control-label" for="full_name">语文</label>
-                                    <input asp-for="五上语文" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
-                                    <span asp-validation-for="五上语文" class="text-danger"></span>
-                                </div>
+                                    <div class="col-md-2">
+                                        <label class="control-label" for="full_name">英语*</label>
+                                        <input asp-for="五上英语" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                        <span asp-validation-for="五上英语" class="text-danger"></span>
+                                    </div>
 
-                                <div class="col-md-2">
-                                    <label class="control-label" for="full_name">数学</label>
-                                    <input asp-for="五上数学" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
-                                    <span asp-validation-for="五上数学" class="text-danger"></span>
-                                </div>
+                                    <div class="col-md-3">
+                                        <label class="control-label" for="full_name">思想品德*</label>
+                                        <input asp-for="五上思品" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
+                                        <span asp-validation-for="五上思品" class="text-danger"></span>
+                                    </div>
 
-                                <div class="col-md-2">
-                                    <label class="control-label" for="full_name">英语</label>
-                                    <input asp-for="五上英语" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
-                                    <span asp-validation-for="五上英语" class="text-danger"></span>
-                                </div>
+                                    <div class="col-md-3">
+                                        <label class="control-label" for="full_name">体育*</label>
+                                        <input asp-for="五上体育" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
+                                        <span asp-validation-for="五上体育" class="text-danger"></span>
+                                    </div>
 
-                                <div class="col-md-3">
-                                    <label class="control-label" for="full_name">思想品德</label>
-                                    <input asp-for="五上思品" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
-                                    <span asp-validation-for="五上思品" class="text-danger"></span>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label class="control-label" for="full_name">体育</label>
-                                    <input asp-for="五上体育" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
-                                    <span asp-validation-for="五上体育" class="text-danger"></span>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="form-group-separator"></div>
-
-                        <div class="form-group">
-
-                            <h4>五年级-下学期</h4>
-                            <div class="row">
-
-                                <div class="col-md-2">
-                                    <label class="control-label" for="full_name">语文</label>
-                                    <input asp-for="五下语文" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
-                                    <span asp-validation-for="五下语文" class="text-danger"></span>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <label class="control-label" for="full_name">数学</label>
-                                    <input asp-for="五下数学" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
-                                    <span asp-validation-for="五下数学" class="text-danger"></span>
-                                </div>
-
-                                <div class="col-md-2">
-                                    <label class="control-label" for="full_name">英语</label>
-                                    <input asp-for="五下英语" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
-                                    <span asp-validation-for="五下英语" class="text-danger"></span>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label class="control-label" for="full_name">思想品德</label>
-                                    <input asp-for="五下思品" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
-                                    <span asp-validation-for="五下思品" class="text-danger"></span>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <label class="control-label" for="full_name">体育</label>
-                                    <input asp-for="五下体育" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
-                                    <span asp-validation-for="五下体育" class="text-danger"></span>
                                 </div>
 
                             </div>
 
-                        </div>
+                            <div class="form-group-separator"></div>
 
-                        <div class="form-group-separator"></div>
+                            <div class="form-group">
 
-                        <div class="form-group">
+                                <h4>五年级-下学期</h4>
+                                <div class="row">
 
-                            <h4>六年级-上学期</h4>
-                            <div class="row">
+                                    <div class="col-md-2">
+                                        <label class="control-label" for="full_name">语文*</label>
+                                        <input asp-for="五下语文" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                        <span asp-validation-for="五下语文" class="text-danger"></span>
+                                    </div>
 
-                                <div class="col-md-2">
-                                    <label class="control-label" for="full_name">语文</label>
-                                    <input asp-for="六上语文" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
-                                    <span asp-validation-for="六上语文" class="text-danger"></span>
-                                </div>
+                                    <div class="col-md-2">
+                                        <label class="control-label" for="full_name">数学*</label>
+                                        <input asp-for="五下数学" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                        <span asp-validation-for="五下数学" class="text-danger"></span>
+                                    </div>
 
-                                <div class="col-md-2">
-                                    <label class="control-label" for="full_name">数学</label>
-                                    <input asp-for="六上数学" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
-                                    <span asp-validation-for="六上数学" class="text-danger"></span>
-                                </div>
+                                    <div class="col-md-2">
+                                        <label class="control-label" for="full_name">英语*</label>
+                                        <input asp-for="五下英语" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                        <span asp-validation-for="五下英语" class="text-danger"></span>
+                                    </div>
 
-                                <div class="col-md-2">
-                                    <label class="control-label" for="full_name">英语</label>
-                                    <input asp-for="六上英语" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
-                                    <span asp-validation-for="六上英语" class="text-danger"></span>
-                                </div>
+                                    <div class="col-md-3">
+                                        <label class="control-label" for="full_name">思想品德*</label>
+                                        <input asp-for="五下思品" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
+                                        <span asp-validation-for="五下思品" class="text-danger"></span>
+                                    </div>
 
-                                <div class="col-md-3">
-                                    <label class="control-label" for="full_name">思想品德</label>
-                                    <input asp-for="六上思品" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
-                                    <span asp-validation-for="六上思品" class="text-danger"></span>
-                                </div>
+                                    <div class="col-md-3">
+                                        <label class="control-label" for="full_name">体育*</label>
+                                        <input asp-for="五下体育" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
+                                        <span asp-validation-for="五下体育" class="text-danger"></span>
+                                    </div>
 
-                                <div class="col-md-3">
-                                    <label class="control-label" for="full_name">体育</label>
-                                    <input asp-for="六上体育" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
-                                    <span asp-validation-for="六上体育" class="text-danger"></span>
                                 </div>
 
                             </div>
 
+                            <div class="form-group-separator"></div>
+
+                            <div class="form-group">
+
+                                <h4>六年级-上学期</h4>
+                                <div class="row">
+
+                                    <div class="col-md-2">
+                                        <label class="control-label" for="full_name">语文*</label>
+                                        <input asp-for="六上语文" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                        <span asp-validation-for="六上语文" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label class="control-label" for="full_name">数学*</label>
+                                        <input asp-for="六上数学" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                        <span asp-validation-for="六上数学" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <label class="control-label" for="full_name">英语*</label>
+                                        <input asp-for="六上英语" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="字母" />
+                                        <span asp-validation-for="六上英语" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="control-label" for="full_name">思想品德*</label>
+                                        <input asp-for="六上思品" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
+                                        <span asp-validation-for="六上思品" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        <label class="control-label" for="full_name">体育*</label>
+                                        <input asp-for="六上体育" type="text" id="TB51pd" class="form-control" maxlength="1" placeholder="仅填字母" />
+                                        <span asp-validation-for="六上体育" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
                         </div>
-
-
-
-                    </div>
 
                 </div>
 
@@ -1080,7 +1083,9 @@
                     else
                     {
                         <p class="bg-danger">
-                            请仔细核对信息，避免录入错误，报名信息一旦错误，后果自负！
+                            请仔细核对信息，避免录入错误，影响录取。<br />
+                            您可以在报名结束前多次登陆以修改并提交保存您的信息，报名结束后请登录本系统打印信息表。<br />
+                            请您一定牢记您的登记编号 @Model.编号 及身份证后6位密码
                         </p>
 
                         <div class="text-right">
