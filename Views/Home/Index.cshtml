@@ -953,6 +953,7 @@
                                     <div class="col-md-4">
                                         <label class="control-label" for="full_name">职务</label>
                                         <select asp-for="父亲职务" id="DDLfzhiwu" class="form-control">
+                                            <option value="无">无</option>
                                             <option value="负责人">负责人</option>
                                             <option value="普通职员">普通职员</option>
                                         </select>
@@ -961,6 +962,7 @@
                                     <div class="col-md-4">
                                         <label class="control-label" for="full_name">职业类别</label>
                                         <select asp-for="父亲职业类别" id="DDLfzhiyeclass" class="form-control">
+                                            <option value="无">无</option>
                                             <option value="公务员">公务员</option>
                                             <option value="医生">医生</option>
                                             <option value="教师">教师</option>
@@ -1027,6 +1029,7 @@
                                     <div class="col-md-4">
                                         <label class="control-label" for="full_name">职务</label>
                                         <select asp-for="母亲职务" id="DDLfzhiwu" class="form-control">
+                                            <option value="无">无</option>
                                             <option value="负责人">负责人</option>
                                             <option value="普通职员">普通职员</option>
                                         </select>
@@ -1035,6 +1038,7 @@
                                     <div class="col-md-4">
                                         <label class="control-label" for="full_name">职业类别</label>
                                         <select asp-for="母亲职业类别" id="DDLfzhiyeclass" class="form-control">
+                                            <option value="无">无</option>
                                             <option value="公务员">公务员</option>
                                             <option value="医生">医生</option>
                                             <option value="教师">教师</option>
@@ -1057,20 +1061,6 @@
                             </div>
 
                         </div>
-
-                        <div class="form-group-separator"></div>
-
-                        <div class="form-group">
-
-                            <h4>住宅电话</h4>
-                            <br />
-                            <label class="control-label">固定电话</label>
-                            <input asp-for="住宅电话" type="text" id="TBhomephone" maxlength="11" class="form-control" />
-                            <p class="bg-info">请加上区号,电话格式如：07713235672</p>
-                            <span asp-validation-for="住宅电话" class="text-danger"></span>
-                        </div>
-
-
 
                     </div>
 

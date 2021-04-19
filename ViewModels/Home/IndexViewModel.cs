@@ -154,7 +154,8 @@ namespace Stusign.ViewModels.Home
 
         [ReadOnly(true)]
         public string 错误信息 { get; set; }
-
+        [ReadOnly(true)]
+        public string 提示信息 { get; set; }
         public Stuinfo To(Stuinfo stuinfo)
         {
             //stuinfo.编号 = 编号;

@@ -95,6 +95,25 @@
                             $("#boxMessage").html(resp.result.message);
                             jQuery('#modal-Message').modal('show');
                         }
+                        if (resp.command.actionName == "ShowMessageRedirect") {
+                            $("#boxMessage").html(resp.result.message);
+
+                            $("#btn-Message").bind('click',
+                                function() {
+                                    window.location.href = resp.command.parameter.url;
+                                });
+
+                            var UnDisable = function() {
+                                $("#btn-Message").attr("disabled", false);
+                            }
+                            
+                            if (resp.command.parameter.waitTime != 0) {
+                                $("#btn-Message").attr("disabled", true);
+                                setTimeout(UnDisable, resp.command.parameter.waitTime);
+                            }
+
+                            jQuery('#modal-Message').modal('show');
+                        }
                     }
 
                     //登录按钮提交
@@ -530,7 +549,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" class="btn btn-info">确定</button>
+                    <button type="button" id="btn-Message" data-dismiss="modal" class="btn btn-info">确定</button>
                 </div>
             </div>
 

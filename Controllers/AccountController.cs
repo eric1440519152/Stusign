@@ -120,6 +120,7 @@ namespace Stusign.Controllers
             var _url = "/";
             var _withError = true;
             var _actionName = "ShowError";
+            var _waitTime = 0;
             var password = "";
 
             //查询数据库是否有用该身份证注册的
@@ -160,12 +161,19 @@ namespace Stusign.Controllers
                 
                 if (result.Succeeded)
                 {
-                    _message = "恭喜您注册成功！请您牢记以下信息</br>登记编号：<strong>" + userinfo.编号.ToString() +
-                               "</strong></br>注册手机号：<strong>" + regPhone +
-                               "</strong></br>密码：<strong>身份证后六位</strong>"+
-                               "</br><span style='color:red'>请立即登录填写基本信息</span>";
-                    _status = "Succeeded";
-                    _actionName = "ShowMessage";
+
+                    var loginResult = await _signInManager.PasswordSignInAsync(_user, password, false, false);
+                    if (loginResult.Succeeded)
+                    {
+                        _message = "请您仔细阅读以下内容：恭喜您注册成功！请您牢记以下信息</br>登记编号：<strong>" + userinfo.编号.ToString() +
+                                   "</strong></br>注册手机号：<strong>" + regPhone +
+                                   "</strong></br>密码：<strong>身份证后六位</strong>"+
+                                   "</br><span style='color:red'>请填写基本信息</span>"+
+                                   "</br><span style='color:red'>十秒钟后您可以点击下方的按钮跳转填写基本信息</span>";
+                        _status = "Succeeded";
+                        _actionName = "ShowMessageRedirect";
+                        _waitTime = 10000;
+                    }
                 }
                 else
                 {
@@ -194,7 +202,8 @@ namespace Stusign.Controllers
                     Parameter = new
                     {
                         Url = _url,
-                        WithError = _withError
+                        WithError = _withError,
+                        WaitTime = _waitTime
                     }
                 }
             });
