@@ -77,7 +77,7 @@
                         <div class="xe-widget xe-counter ">
 
                             <div class="xe-label">
-                                <strong class="num text-danger">请牢记左侧登记号</strong>
+                                <strong class="num text-danger">请牢记登记号</strong>
                                 <span class="text-danger">可用登记号及身份证后六位登录管理个人信息</span>
                             </div>
                         </div>
@@ -1089,6 +1089,13 @@
                         </p>
 
                         <div class="text-right">
+                            @if (ViewBag.Print)
+                            {
+                                <a href="@ViewBag.PrintUrl" class="btn btn-warning btn-icon btn-icon-standalone">
+                                    <i class="fa-print"></i>
+                                    <span>打印信息登记卡</span>
+                                </a>
+                            }
                             <button type="submit" class="btn btn-info btn-icon btn-icon-standalone">
                                 <i class="fa-save"></i>
                                 <span>提交并保存</span>

@@ -33,7 +33,8 @@ namespace Stusign.Controllers
 
             ViewBag.FileSizeMax = 5;
             ViewBag.Avatar = (stuinfo.头像文件 == "")||(stuinfo.头像文件 == null)?"":Url.Action("Avatar","File");
-            ViewBag.Print = _systemOptions.打印开放 && (bool)stuinfo.审核结果;
+            ViewBag.Print = _systemOptions.打印开放;
+            ViewBag.PrintUrl = "http://baiseadmin.gxufz.com/requeststuprintpage.aspx?sid="+uid+"&token="+SafeCrypto.MD5(uid+"gxufzpasswd","utf-8").ToUpper();
 
 
             IndexViewModel _indexView = new IndexViewModel();
