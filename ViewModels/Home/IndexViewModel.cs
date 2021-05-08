@@ -9,7 +9,7 @@ namespace Stusign.ViewModels.Home
     public class IndexViewModel
     {
         [ReadOnly(true)]
-        public short 编号 { get; set; }
+        public int 编号 { get; set; }
         public string 头像文件 { get; set; }
         [Required(ErrorMessage = "该项必填")]
         [MaxLength(4,ErrorMessage = "请输入正确的名字")]
