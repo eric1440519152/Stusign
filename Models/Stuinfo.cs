@@ -5,7 +5,7 @@ namespace Stusign.Models
 {
     public partial class Stuinfo
     {
-        public int 编号 { get; set; }
+        public short 编号 { get; set; }
         public string 姓名 { get; set; }
         public string 头像文件 { get; set; }
         public string 身份证号 { get; set; }
