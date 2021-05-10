@@ -98,7 +98,7 @@ namespace Stusign.Libraries
 
             if (卡片打印)
                 state = "已打印";
-            else if (打印开放)
+            else if (是否入围 && 打印开放)
                 state = "待打印";
             else if ((操作状态 == "2" && !(bool) 修改开放) || 操作状态 == "0")
                 state = "已锁定";

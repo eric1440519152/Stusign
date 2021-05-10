@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace Stusign.Libraries
 {
@@ -55,29 +53,11 @@ namespace Stusign.Libraries
         public static string signHash(string signatureString, string secretKey = "Stusign")
         {
             var enc = Encoding.UTF8;
-            var md5 = System.Security.Cryptography.MD5.Create();
+            var md5 = MD5.Create();
 
-            var buffer = enc.GetBytes(signatureString+secretKey);
+            var buffer = enc.GetBytes(secretKey + signatureString);
             buffer = md5.ComputeHash(buffer);
             return Convert.ToBase64String(buffer);
-        }
-        public static string MD5(string text, string charset)
-        {
-            try
-            {
-                MD5CryptoServiceProvider MD5 = new MD5CryptoServiceProvider();
-                return BitConverter
-                    .ToString(MD5
-                        .ComputeHash(Encoding
-                            .GetEncoding(charset)
-                            .GetBytes(text)))
-                    .Replace("-", "");
-            }
-            catch
-            {
-            }
-
-            return string.Empty;
         }
     }
 }
