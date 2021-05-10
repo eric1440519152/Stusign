@@ -17,7 +17,7 @@ namespace Stusign.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly SystemOptions _systemOptions;
         private readonly StusignContext _context;
-        private short uid;
+        private int uid;
 
         public HomeController(ILogger<HomeController> logger, SystemOptions systemOptions,StusignContext context)
         {
@@ -28,7 +28,7 @@ namespace Stusign.Controllers
 
         public async Task<IActionResult> Index(String successMsg)
         {
-            uid = Convert.ToInt16(User.Identity.Name);
+            uid = Convert.ToInt32(User.Identity.Name);
             var stuinfo = await _context.Stuinfo.AsNoTracking().FirstAsync(e => e.编号==uid);
 
             ViewBag.FileSizeMax = 5;
@@ -45,7 +45,7 @@ namespace Stusign.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveInfo(IndexViewModel indexView)
         {
-            uid = Convert.ToInt16(User.Identity.Name);
+            uid = Convert.ToInt32(User.Identity.Name);
             var stuinfo = await _context.Stuinfo.FirstAsync(e => e.编号==uid);
 
             if (!ModelState.IsValid)
