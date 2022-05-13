@@ -57,22 +57,6 @@ namespace Stusign.Controllers
                 return View("Index", indexView);
             }
 
-            var sum = Convert.ToInt16(indexView.五县三好)  + Convert.ToInt16(indexView.五县优干) +Convert.ToInt16(indexView.五县优少) +
-                      Convert.ToInt16(indexView.五市三好) + Convert.ToInt16(indexView.五市优干) + Convert.ToInt16(indexView.五市优少) +
-                      Convert.ToInt16(indexView.五校三好) + Convert.ToInt16(indexView.五校优干) + Convert.ToInt16(indexView.五校优少) +
-                      Convert.ToInt16(indexView.六县三好)  + Convert.ToInt16(indexView.六县优干) +Convert.ToInt16(indexView.六县优少) +
-                      Convert.ToInt16(indexView.六市三好) + Convert.ToInt16(indexView.六市优干) + Convert.ToInt16(indexView.六市优少) +
-                      Convert.ToInt16(indexView.六校三好) + Convert.ToInt16(indexView.六校优干) + Convert.ToInt16(indexView.六校优少);
-
-            if (sum > 24)
-            {
-                ViewBag.FileSizeMax = 5;
-                ViewBag.Avatar = (stuinfo.头像文件 == "")||(stuinfo.头像文件 == null)?"":Url.Action("Avatar","File");
-                ViewBag.Print = _systemOptions.打印开放 && (bool)stuinfo.审核结果;
-                indexView.错误信息 = "您的获奖次数之和大于24次，请您挑选您认为最重要的次数填写。";
-                return View("Index", indexView);
-            }
-
             if (_systemOptions.IsLocked(uid))
             {
                 return StatusCode(403);

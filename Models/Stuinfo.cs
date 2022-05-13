@@ -5,7 +5,7 @@ namespace Stusign.Models
 {
     public partial class Stuinfo
     {
-        public short 编号 { get; set; }
+        public int 编号 { get; set; }
         public string 姓名 { get; set; }
         public string 头像文件 { get; set; }
         public string 身份证号 { get; set; }
@@ -64,7 +64,7 @@ namespace Stusign.Models
         public string 母亲职业类别 { get; set; }
         public string 住宅电话 { get; set; }
         public string 兴趣爱好 { get; set; }
-        public string 兴趣爱好荣誉 { get; set; }
+        public string 县级以上荣誉 { get; set; }
         public string 学生职务 { get; set; }
         public DateTime? 登记时间 { get; set; }
         public string 登记地址 { get; set; }

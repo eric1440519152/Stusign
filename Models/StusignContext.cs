@@ -108,9 +108,9 @@ namespace Stusign.Models
 
                 entity.Property(e => e.姓名).HasMaxLength(8);
 
-                entity.Property(e => e.兴趣爱好).HasMaxLength(10);
+                entity.Property(e => e.兴趣爱好).HasMaxLength(20);
 
-                entity.Property(e => e.兴趣爱好荣誉).HasMaxLength(100);
+                entity.Property(e => e.县级以上荣誉).HasMaxLength(120);
 
                 entity.Property(e => e.学生职务).HasMaxLength(20);
 
